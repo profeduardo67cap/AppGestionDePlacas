@@ -21,6 +21,7 @@ from CatalogoDePlacas import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('logearse/', views.logearse, name='logearse'),
+    # path('loguearse/', views.loguearse, name='loguearse'),
     path('oficina/', views.oficina, name='oficina'),
+    path('loguearse/', views.loguearse, name='loguearse'),
 ]
