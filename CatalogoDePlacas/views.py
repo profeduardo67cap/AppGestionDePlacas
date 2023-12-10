@@ -1,8 +1,10 @@
 # from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.contrib.auth import login
+# from django.http import HttpResponse
+# from django.db import IntegrityError
 
 # Create your views here.
 
@@ -10,7 +12,6 @@ def home(request):
     return render(request,'home.html')
 
 def logearse(request):
-
     if request.method == 'GET':
         return render(request,'logearse.html',{
             'form': UserCreationForm
@@ -20,7 +21,9 @@ def logearse(request):
             try:
                     user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
                     user.save()
-                    return HttpResponse('Usuario creado satisfactoriamente')
+                    login(request, user)
+                    return redirect('oficina')
+                    # return HttpResponse('Usuario creado satisfactoriamente')
             except:
                 return render(request,'logearse.html',{
                      'form': UserCreationForm,
@@ -30,3 +33,6 @@ def logearse(request):
             'form': UserCreationForm,
             'error': 'Contraseñas no coinciden'
     })
+
+def oficina(request):
+     return render(request, 'oficina.html')
