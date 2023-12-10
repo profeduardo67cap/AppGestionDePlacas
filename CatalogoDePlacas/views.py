@@ -11,9 +11,9 @@ from django.contrib.auth import login
 def home(request):
     return render(request,'home.html')
 
-def logearse(request):
+def loguearse(request):
     if request.method == 'GET':
-        return render(request,'logearse.html',{
+        return render(request,'loguearse.html',{
             'form': UserCreationForm
         })
     else:
@@ -25,11 +25,11 @@ def logearse(request):
                     return redirect('oficina')
                     # return HttpResponse('Usuario creado satisfactoriamente')
             except:
-                return render(request,'logearse.html',{
+                return render(request,'loguearse.html',{
                      'form': UserCreationForm,
                      'error': 'El usuario ya existe'
                 })
-        return render(request,'logearse.html',{
+        return render(request,'loguearse.html',{
             'form': UserCreationForm,
             'error': 'Contraseñas no coinciden'
     })
