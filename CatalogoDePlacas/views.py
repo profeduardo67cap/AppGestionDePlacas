@@ -22,12 +22,11 @@ def logearse(request):
                     user.save()
                     return HttpResponse('Usuario creado satisfactoriamente')
             except:
-                 return HttpResponse('El usuario ya existe')
-        return HttpResponse('No coinciden las contraseñas')
-
-
-
-
-    return render(request,'logearse.html',{
-        'form': UserCreationForm
+                return render(request,'logearse.html',{
+                     'form': UserCreationForm,
+                     'error': 'El usuario ya existe'
+                })
+        return render(request,'logearse.html',{
+            'form': UserCreationForm,
+            'error': 'Contraseñas no coinciden'
     })
