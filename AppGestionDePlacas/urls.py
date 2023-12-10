@@ -20,6 +20,6 @@ from CatalogoDePlacas import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.helloworld),
-    path('logearse/', views.helloworld),
+    path('', views.home, name='home'),
+    path('logearse/', views.logearse, name='logearse'),
 ]
