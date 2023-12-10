@@ -24,4 +24,6 @@ urlpatterns = [
     # path('loguearse/', views.loguearse, name='loguearse'),
     path('oficina/', views.oficina, name='oficina'),
     path('loguearse/', views.loguearse, name='loguearse'),
+    path('cerrarSesion/', views.cerrarSesion, name='cerrarSesion'),
+    path('signin/', views.signin, name='signin'),
 ]
