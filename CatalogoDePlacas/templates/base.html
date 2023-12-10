@@ -14,14 +14,16 @@
             <li>
                 <a href="/oficina">Oficina</a>
             </li>
-            
             {% if user.is_authenticated %}
                 <li>
-                    <a href="/salir">Salir</a>
+                    <a href="/cerrarSesion">Salir</a>
                 </li>
             {% else %}
                 <li>
-                    <a href="/loguearse">Logearse</a>
+                    <a href="/loguearse">Crear Usuario</a>
+                </li>
+                <li>
+                    <a href="/signin">Entrar al Sistema</a>
                 </li>
             {% endif %}
         </ul>
