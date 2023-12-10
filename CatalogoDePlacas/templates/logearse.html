@@ -1,5 +1,7 @@
 <h1>Logearse al Sistema</h1>
 
+{{error}}
+
 <form action="/logearse/" method="POST">
     {% csrf_token %}
     {{form.as_p}}
