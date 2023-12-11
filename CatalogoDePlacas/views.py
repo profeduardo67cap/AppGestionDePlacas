@@ -1,10 +1,9 @@
-# from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
-# from django.http import HttpResponse
-# from django.db import IntegrityError
+from .forms import OficinaForm
+
 
 # Create your views here.
 
@@ -23,7 +22,6 @@ def loguearse(request):
                     user.save()
                     login(request, user)
                     return redirect('oficina')
-                    # return HttpResponse('Usuario creado satisfactoriamente')
             except:
                 return render(request,'loguearse.html',{
                      'form': UserCreationForm,
@@ -36,6 +34,24 @@ def loguearse(request):
 
 def oficina(request):
      return render(request, 'oficina.html')
+
+def oficinaCrear(request):
+    if request.method == 'GET':
+        return render(request, 'oficinaCrear.html',{
+            'form': OficinaForm
+        })
+    else:
+        try:
+            form = OficinaForm(request.POST)
+            new_task = form.save(commit=False)
+            new_task.user = request.user
+            new_task.save()
+            return redirect('oficina')
+        except ValueError:
+            return render(request, 'oficinaCrear.html',{
+            'form': OficinaForm,
+            'error': 'Por favor provee datos válidos'
+        })
 
 def cerrarSesion(request):
      logout(request)
