@@ -1,7 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content%}
-<h1>Oficina</h1>
+    <h1>Oficina</h1>
+    <ul>
+        {% for oficina in oficinas %}
+            <li>
+                <a href="{% url 'oficinaDetalle' oficina.oficinaId %}">
+                    {{oficina.oficinaId}}<br/>
+                    {{oficina.nombre}}<br/>
+                    {{oficina.ciudad}}<br/>
+                    {{oficina.telefono}}<br/>
+                    {{oficina.responsable}}<br/>
+                    {{oficina.cp}}<br/>
+                </a>
+            </li>
+        {% endfor %}    
+    </ul>
+    
 {% endblock %}
 
 
