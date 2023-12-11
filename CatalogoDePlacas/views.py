@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from .forms import OficinaForm
+from .models import Oficina
 
 
 # Create your views here.
@@ -33,7 +34,10 @@ def loguearse(request):
     })
 
 def oficina(request):
-     return render(request, 'oficina.html')
+     oficinas = Oficina.objects.all
+     return render(request, 'oficina.html', {
+         'oficinas': oficinas
+     })
 
 def oficinaCrear(request):
     if request.method == 'GET':
@@ -52,6 +56,11 @@ def oficinaCrear(request):
             'form': OficinaForm,
             'error': 'Por favor provee datos válidos'
         })
+
+def oficinaDetalle(request, oficinaId):
+    # oficina = Oficina.objects.get(pk=oficinaId)
+    oficina = get_object_or_404(Oficina,pk=oficinaId)
+    return render(request, 'oficinaDetalle.html', {'oficina': oficina })
 
 def cerrarSesion(request):
      logout(request)
