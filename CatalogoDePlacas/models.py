@@ -6,6 +6,7 @@ from django.utils import timezone
 
 
 class Oficina(models.Model):
+    oficinaId = models.IntegerField(default=1)
     nombre = models.CharField(max_length=40)
     ciudad = models.CharField(max_length=30)
     telefono = models.CharField(max_length=15)
