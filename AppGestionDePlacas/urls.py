@@ -24,6 +24,7 @@ urlpatterns = [
     path('oficina/', views.oficina, name='oficina'),
     path('oficinaCrear/', views.oficinaCrear, name='oficinaCrear'),
     path('oficinaDetalle/<int:oficinaId>/', views.oficinaDetalle, name='oficinaDetalle'),
+    path('oficinaDetalle/<int:oficinaId>/oficinaEliminar', views.oficinaEliminar, name='oficinaEliminar'),
     path('loguearse/', views.loguearse, name='loguearse'),
     path('cerrarSesion/', views.cerrarSesion, name='cerrarSesion'),
     path('signin/', views.signin, name='signin'),
