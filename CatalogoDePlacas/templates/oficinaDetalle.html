@@ -4,4 +4,22 @@
 
 {% block content%}
     <h1>{{oficina.oficinaId}}</h1>
+
+    {{error}}
+
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button>
+            Actualizar
+        </button>
+    </form>
+
+    <form action="{% url 'oficinaEliminar' oficina.oficinaId %}" method="POST" >
+        {% csrf_token %}
+        <button>
+            eliminar
+        </button>
+    </form>
+    
 {% endblock %}
