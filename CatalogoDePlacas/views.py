@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from .forms import OficinaForm
 from .models import Oficina
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -33,12 +34,14 @@ def loguearse(request):
             'error': 'Contraseñas no coinciden'
     })
 
+@login_required
 def oficina(request):
      oficinas = Oficina.objects.all
      return render(request, 'oficina.html', {
          'oficinas': oficinas
      })
 
+@login_required
 def oficinaCrear(request):
     if request.method == 'GET':
         return render(request, 'oficinaCrear.html',{
@@ -57,11 +60,37 @@ def oficinaCrear(request):
             'error': 'Por favor provee datos válidos'
         })
 
+@login_required
 def oficinaDetalle(request, oficinaId):
-    # oficina = Oficina.objects.get(pk=oficinaId)
-    oficina = get_object_or_404(Oficina,pk=oficinaId)
-    return render(request, 'oficinaDetalle.html', {'oficina': oficina })
+    if request.method =='GET':
+        # oficina = Oficina.objects.get(pk=oficinaId)
+        oficina = get_object_or_404(Oficina,pk=oficinaId)
+        form = OficinaForm(instance=oficina)
+        return render(request, 'oficinaDetalle.html', {
+            'oficina': oficina,
+            'form': form
+        })
+    else:
+        try:
+            oficina = get_object_or_404(Oficina, pk=oficinaId)
+            form = OficinaForm(request.POST, instance=oficina)
+            form.save()
+            return redirect('oficina')
+        except ValueError:
+            return render(request, 'oficinaDetalle.html', {
+            'oficina': oficina,
+            'form': form,
+            'error': "Error al optimizar la oficina"
+        })
 
+@login_required
+def oficinaEliminar(request, oficinaId):
+    oficina = get_object_or_404(Oficina, pk=oficinaId)
+    if request.method == 'POST':
+        oficina.delete()
+        return redirect('oficina')
+
+@login_required
 def cerrarSesion(request):
      logout(request)
      return redirect('home')
