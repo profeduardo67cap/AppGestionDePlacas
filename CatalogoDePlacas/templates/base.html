@@ -4,33 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li>
-                <a href="/">Home</a>
-            </li>
-            {% if user.is_authenticated %}
-                <li>
-                    <a href="/oficina">Oficina</a>
+      <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
                 </li>
-                <li>
-                    <a href="/oficinaCrear/">Crear Oficina</a>
-                </li>
-                <li>
-                    <a href="/cerrarSesion">Salir</a>
-                </li>
-            {% else %}
-                <li>
-                    <a href="/loguearse">Crear Usuario</a>
-                </li>
-                <li>
-                    <a href="/signin">Entrar al Sistema</a>
-                </li>
-            {% endif %}
-        </ul>
-    </nav>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/oficina">Oficina</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/oficinaCrear/">Crear Oficina</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cerrarSesion">Salir</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/loguearse">Crear Usuario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signin">Entrar al Sistema</a>
+                    </li>
+                {% endif %}
+              </ul>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
     {% block content %}
     {% endblock %}
 </body>
